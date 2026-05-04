@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-airbnb-red: #ff385c;
+  --color-airbnb-ink: #222222;
+  --color-airbnb-body: #3f3f3f;
+  --color-airbnb-muted: #6a6a6a;
+  --color-airbnb-hairline: #dddddd;
+  --color-airbnb-surface: #f7f7f7;
+  --radius-airbnb: 14px;
+}
+
+body {
+  background-color: #ffffff;
+  color: #222222;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Inter', sans-serif;
+}
+
+.airbnb-shadow {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.soft-shadow {
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
