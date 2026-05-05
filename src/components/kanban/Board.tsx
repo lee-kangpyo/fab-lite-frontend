@@ -1,5 +1,6 @@
 import { useTasks } from "@/hooks/useTasks";
 import { api } from "@/lib/api";
+import { AnimatePresence } from "framer-motion";
 import { Column } from "./Column";
 
 const COLUMNS = ["todo", "in_progress", "done"];
@@ -14,9 +15,11 @@ export function Board() {
 
   return (
     <div className="flex space-x-8 overflow-x-auto pb-8 h-full">
-      {COLUMNS.map((col) => (
-        <Column key={col} status={col} tasks={tasks.filter((t) => t.status === col)} onStatusChange={handleStatusChange} />
-      ))}
+      <AnimatePresence mode="popLayout">
+        {COLUMNS.map((col) => (
+          <Column key={col} status={col} tasks={tasks.filter((t) => t.status === col)} onStatusChange={handleStatusChange} />
+        ))}
+      </AnimatePresence>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import { AnimatePresence } from "framer-motion";
 import { Task } from "@/lib/api";
 import { TaskCard } from "./TaskCard";
 
@@ -13,11 +12,9 @@ export function Column({ status, tasks, onStatusChange }: Props) {
         {labels[status]} ({tasks.length})
       </h3>
       <div className="flex-1 space-y-4">
-        <AnimatePresence>
-          {tasks.map((task) => (
-            <TaskCard key={task.id} task={task} onStatusChange={onStatusChange} />
-          ))}
-        </AnimatePresence>
+        {tasks.map((task) => (
+          <TaskCard key={task.id} task={task} onStatusChange={onStatusChange} />
+        ))}
       </div>
     </div>
   );

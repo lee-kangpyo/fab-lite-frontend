@@ -9,7 +9,17 @@ export function useChat() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    api.createSession().then(({ session_id }) => setSessionId(session_id));
+    let cancelled = false;
+
+    api.createSession().then(({ session_id }) => {
+      if (!cancelled) {
+        setSessionId(session_id);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const sendMessage = async (content: string) => {
