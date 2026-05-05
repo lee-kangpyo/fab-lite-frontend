@@ -3,9 +3,14 @@ import { TaskCard } from "./TaskCard";
 
 const labels: Record<string, string> = { todo: "할 일", in_progress: "진행 중", done: "완료" };
 
-interface Props { status: string; tasks: Task[]; onStatusChange: (id: string, status: string) => void; }
+interface Props { 
+  status: string; 
+  tasks: Task[]; 
+  onStatusChange: (id: string, status: string) => void; 
+  onDelete: (id: string) => void;
+}
 
-export function Column({ status, tasks, onStatusChange }: Props) {
+export function Column({ status, tasks, onStatusChange, onDelete }: Props) {
   return (
     <div className="flex flex-col w-80 flex-shrink-0">
       <h3 className="text-xs font-bold text-airbnb-muted uppercase tracking-widest px-2 mb-4">
@@ -13,7 +18,7 @@ export function Column({ status, tasks, onStatusChange }: Props) {
       </h3>
       <div className="flex-1 space-y-4">
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} onStatusChange={onStatusChange} />
+          <TaskCard key={task.id} task={task} onStatusChange={onStatusChange} onDelete={onDelete} />
         ))}
       </div>
     </div>

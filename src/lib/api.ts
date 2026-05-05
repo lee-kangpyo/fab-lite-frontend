@@ -27,6 +27,13 @@ export const api = {
     return res.json();
   },
 
+  async deleteTask(id: string): Promise<void> {
+    const res = await fetch(`${BASE_URL}/api/tasks/${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) throw new Error("Failed to delete task");
+  },
+
   async createSession(): Promise<{ session_id: string }> {
     const res = await fetch(`${BASE_URL}/api/chat/sessions`, { method: "POST" });
     if (!res.ok) throw new Error("Failed to create session");
