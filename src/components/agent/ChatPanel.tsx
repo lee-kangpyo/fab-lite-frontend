@@ -57,7 +57,7 @@ export function ChatPanel() {
               className="w-full text-left p-3 hover:bg-airbnb-surface rounded-xl mb-2"
             >
               <p className="font-bold text-sm truncate">{session.title}</p>
-              <p className="text-xs text-airbnb-muted">{new Date(session.updated_at).toLocaleDateString()}</p>
+              <p className="text-xs text-airbnb-muted">{new Date(session.updated_at).toLocaleString()}</p>
             </button>
           ))}
         </div>
