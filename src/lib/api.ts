@@ -49,4 +49,14 @@ export const api = {
     if (!res.ok) throw new Error("Failed to send message");
     return res.json();
   },
+
+  async getSessions(): Promise<any[]> {
+    const res = await fetch(`${BASE_URL}/api/chat/sessions`);
+    return res.json();
+  },
+
+  async getSessionHistory(sessionId: string): Promise<any> {
+    const res = await fetch(`${BASE_URL}/api/chat/sessions/${sessionId}/history`);
+    return res.json();
+  },
 };
