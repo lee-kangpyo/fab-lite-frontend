@@ -25,8 +25,8 @@ export function ChatPanel() {
     await sendMessage(msg);
   };
 
-  const handleNewChat = async () => {
-    await createSession();
+  const handleSessionClick = async (sessionId: string) => {
+    await loadSession(sessionId);
     setIsListView(false);
   };
 
@@ -47,13 +47,13 @@ export function ChatPanel() {
 
       {isListView ? (
         <div className="flex-1 p-5 overflow-y-auto">
-          <button onClick={handleNewChat} className="w-full p-3 bg-airbnb-red text-white rounded-xl mb-4 font-bold">
+          <button onClick={() => { createSession(); setIsListView(false); }} className="w-full p-3 bg-airbnb-red text-white rounded-xl mb-4 font-bold">
             + 새 대화 시작하기
           </button>
           {sessions.map((session) => (
             <button
               key={session.id}
-              onClick={() => { loadSession(session.id); setIsListView(false); }}
+              onClick={() => handleSessionClick(session.id)}
               className="w-full text-left p-3 hover:bg-airbnb-surface rounded-xl mb-2"
             >
               <p className="font-bold text-sm truncate">{session.title}</p>
