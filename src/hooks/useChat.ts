@@ -11,7 +11,10 @@ export function useChat(initialSessionId?: string) {
   const loadSession = useCallback(async (id: string) => {
     try {
       const history = await api.getSessionHistory(id);
-      setMessages(history.messages.map((m) => ({ role: m.role as "user" | "assistant", content: m.content })));
+      console.log("[loadSession] history:", history);
+      const loadedMessages = history.messages.map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
+      console.log("[loadSession] mapped messages:", loadedMessages);
+      setMessages(loadedMessages);
       setSessionId(id);
     } catch (e) {
       console.error("Failed to load session:", e);
@@ -32,13 +35,14 @@ export function useChat(initialSessionId?: string) {
   };
 
   const sendMessage = async (content: string) => {
-    if (!sessionId) {
-      await createSession();
+    let currentSessionId = sessionId;
+    if (!currentSessionId) {
+      currentSessionId = await createSession();
     }
     setMessages((prev) => [...prev, { role: "user", content }]);
     setIsLoading(true);
     try {
-      const { reply } = await api.sendMessage(sessionId!, content);
+      const { reply } = await api.sendMessage(currentSessionId!, content);
       setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
     } catch (e) {
       setMessages((prev) => [...prev, { role: "assistant", content: "응답 오류가 발생했습니다." }]);
