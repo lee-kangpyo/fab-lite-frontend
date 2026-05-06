@@ -11,7 +11,7 @@ export function useChat(initialSessionId?: string) {
   const loadSession = useCallback(async (id: string) => {
     try {
       const history = await api.getSessionHistory(id);
-      setMessages(history.messages.map((m: any) => ({ role: m.role, content: m.content })));
+      setMessages(history.messages.map((m) => ({ role: m.role as "user" | "assistant", content: m.content })));
       setSessionId(id);
     } catch (e) {
       console.error("Failed to load session:", e);

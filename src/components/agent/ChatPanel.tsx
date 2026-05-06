@@ -26,10 +26,8 @@ export function ChatPanel() {
   };
 
   const handleNewChat = async () => {
-    if (createSession) {
-      await createSession();
-      setIsListView(false);
-    }
+    await createSession();
+    setIsListView(false);
   };
 
   return (
@@ -66,8 +64,8 @@ export function ChatPanel() {
       ) : (
         <>
           <div className="flex-1 p-5 overflow-y-auto space-y-4 bg-white text-sm">
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+{messages.map((msg, i) => (
+          <div key={`${msg.role}-${i}`} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`px-4 py-3 max-w-[85%] ${msg.role === "user" ? "bg-airbnb-red text-white rounded-2xl rounded-tr-none" : "bg-airbnb-surface text-airbnb-ink border border-airbnb-hairline rounded-2xl rounded-tl-none"}`}>
                   {msg.content}
                 </div>

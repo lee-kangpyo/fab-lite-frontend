@@ -50,13 +50,15 @@ export const api = {
     return res.json();
   },
 
-  async getSessions(): Promise<any[]> {
+  async getSessions(): Promise<{id: string; title: string; created_at: string; updated_at: string}[]> {
     const res = await fetch(`${BASE_URL}/api/chat/sessions`);
+    if (!res.ok) throw new Error("Failed to fetch sessions");
     return res.json();
   },
 
-  async getSessionHistory(sessionId: string): Promise<any> {
+  async getSessionHistory(sessionId: string): Promise<{session_id: string; messages: Array<{role: string; content: string}>}> {
     const res = await fetch(`${BASE_URL}/api/chat/sessions/${sessionId}/history`);
+    if (!res.ok) throw new Error("Failed to fetch session history");
     return res.json();
   },
 };
